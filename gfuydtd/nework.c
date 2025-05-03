@@ -1,38 +1,37 @@
 /* nework.c */
-#define _CRT_SECURE_NO_WARNINGS  // Disable warnings for unsafe functions like scanf, strcpy, etc.
+#define _CRT_SECURE_NO_WARNINGS
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <stdbool.h>
-#include <conio.h>  // For _getch() to mask password input
+#include <conio.h>  
 
-// Constants
+
 #define MAX_LEN 50
 #define PASSWORD_LEN 6
 #define FLEET_FILE "fleet.txt"
 #define LOGIN_FILE "login.txt"
 
-// Enumerations for machine types and breakdown frequency
 typedef enum { TRACTOR = 1, EXCAVATOR, ROLLER, CRANE, MIXER } MachineType;
 typedef enum { NEVER = 1, LESS_THAN_THREE, LESS_THAN_FIVE, MORE_THAN_FIVE } BreakdownFreq;
 
-// Machine structure representing a fleet machine
+// typedef struct for the machines 
 typedef struct Machine {
     char Number[MAX_LEN];      // Machine number
-    char make[MAX_LEN];        // Manufacturer
+    char make[MAX_LEN];        
     char mode[MAX_LEN];        // Model
-    int year;                  // Year of manufacture
+    int year;                 
     float cost;                // Purchase cost
-    float currentV;            // Current valuation
+    float currentV;            
     int  Mileage;              // Current mileage
     int nextMileage;           // Next service mileage
-    char Name[MAX_LEN];        // Owner's name
-    char Email[MAX_LEN];       // Owner's email
-    char Phone[MAX_LEN];       // Owner's phone number
+    char Name[MAX_LEN];        // your name
+    char Email[MAX_LEN];       // your email
+    char Phone[MAX_LEN];       // your phone number
     MachineType type;          // Machine type
-    BreakdownFreq breakdowns;  // Breakdown frequency
-    struct Machine* next;      // Pointer to next machine (linked list)
+    BreakdownFreq breakdowns; 
+    struct Machine* next;      
 } Machine;
 
 // Structure for login credentials
@@ -62,28 +61,28 @@ bool validateEmail(const char* email);
 
 // Main program
 int main() {
-    Login logins[3];       // Array to store login credentials
-    int Count = 0;         // Number of logins read
-    Machine* fleet = NULL; // Head of machine linked list
+    Login logins[3];       
+    int Count = 0;        
+    Machine* fleet = NULL; 
 
-    loadLoginData(logins, &Count);  // Load users from file
+    loadLoginData(logins, &Count);  // Load names from file
     if (!loginSystem(logins, Count)) {  // Validate login
         printf("Access Denied.\n");
         return 0;
     }
 
-    loadFleet(&fleet);  // Load fleet data from file
+    loadFleet(&fleet);  // Load fleet.txt  from file
 
     int choice;
     do {
-        // Display main menu
-        printf("\n--- Fleet Management Menu ---\n");
+        // Display main 
+        printf("\n..... Fleet Menu ...................\n");
         printf("1. Add Machine\n");
         printf("2. Display All Machines\n");
         printf("3. Display Details\n");
         printf("4. Update Machine\n");
         printf("5. Delete Machine\n");
-        printf("6. Generate \n");
+        printf("6. Generate all the details for thw machine \n");
         printf("7. Print File\n");
         printf("8. List Machines\n");
         printf("0. Exit\n> ");
@@ -94,9 +93,9 @@ int main() {
             printf("Invalid....\n");
             continue;
         }
-        getchar();  // Clear newline from input buffer
+        getchar();  // Clear newline
 
-        // Menu operations
+        // using case for he main menu
         switch (choice) {
         case 1: addMachine(&fleet); break;
         case 2: displayAllMachines(fleet); break;
