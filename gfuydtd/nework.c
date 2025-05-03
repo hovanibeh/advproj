@@ -82,7 +82,7 @@ int main() {
         printf("0. Exit\n> ");
         if (scanf("%d", &choice) != 1) {
             while (getchar() != '\n'); // clear invalid input
-            printf("Invalid input. Please enter a number.\n");
+            printf("Invalid . Please enter a number.\n");
             continue;
         }
         getchar();
@@ -137,20 +137,4 @@ void loadLoginData(Login logins[], int* count) {
     fclose(file);
 }
 
-bool loginSystem(Login logins[], int count) {
-    char user[MAX_LEN], pass[PASSWORD_LEN + 1];
-    printf("Username: ");
-    scanf("%s", user);
-    printf("Password: ");
-    maskPassword(pass);
 
-    for (int i = 0; i < count; i++) {
-        if (strcmp(user, logins[i].username) == 0 && strcmp(pass, logins[i].password) == 0)
-            return true;
-    }
-    return false;
-}
-
-bool validateEmail(const char* email) {
-    return strstr(email, "@") && strstr(email, ".") && strstr(email, ".com");
-}
